@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>History</title>
+    <meta charset="utf-8">
+    <script src="jquery.js"></script>
+    <script src="socket.io/socket.io.js"> </script>
+    <script src="xuly.js"></script>
+    <script src="highcharts.js"></script>
+    <script src="export-data.js"></script>
+    <script src="accessibility.js"></script>
+    <link rel="stylesheet" type="text/css" href="history.css">
+</head>
+ 
+<body>
+    <h1 style="color: #b268ee;">Lịch sử đo <a href="/" class="form">Home</a></h1>
+    <div id="RTC"></div>
+ 
+    <div id="wrapper">
+        <div id="left">
+            <div class="boxtitle">Bảng lịch sử đo</div>
+        </div>
+
+        <div id="h-header">
+            <div id="h-id" class="header-content">ID</div>
+            <div id="h-time" class="header-content">Thời gian</div>
+            <div id="h-temp" class="header-content">Nhiệt độ</div>
+            <div id="h-humi" class="header-content">Độ ẩm</div>
+            <div id="h-light" class="header-content">Ánh sáng</div>
+        </div>
+
+        <div id="h-body">
+            <div id="id-content"></div>
+            <div id="time-content"></div>
+            <div id="temp-content"></div>
+            <div id="humi-content"></div>
+            <div id="light-content"></div>
+        </div>
+</body>
+
+</html>

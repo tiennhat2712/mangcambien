@@ -1,0 +1,132 @@
+*{
+    font-family: sans-serif;
+}
+
+h1{
+    /* background-color: chocolate; */
+    padding: 10px 20px 10px 10px;
+    margin: 0px;
+}
+
+#RTC{
+    padding: 10px;
+    background-color: #c7bdb3;
+}
+
+body{
+    background-color: #ebeef8;
+}
+
+#left {
+   width: 100%;
+   background-color: darksalmon;
+   float: center;
+}
+
+.boxtitle{
+    font-weight: bold;
+    font-size: medium;
+    padding: 20px 20px 20px 10px;
+    font-size: 125%;
+    border-top: aliceblue solid 2px;
+    border-bottom: aliceblue solid 2px;
+    text-align: center;
+}
+
+#h-header{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    /* background-color: darksalmon; */
+}
+
+.form {    
+    float: right;
+    margin-left: 13px;
+    padding-left: 7px;
+    padding-right: 7px;
+    text-decoration: none;
+    color: #8a7c7c;
+    border: 1px solid rgb(234, 20, 241);
+    border-radius: 10px;
+}
+
+.form:hover {
+    cursor: pointer;
+    background-color: rgb(105, 105, 218);
+    color: white;
+    transition: 0.7s;
+}
+
+
+.header-content{
+    padding: 10px 0px;
+    background-color: transparent;
+    font-size: 120%;
+    text-align: center;
+}
+
+#h-id{
+    float: left;
+    width: 12%;
+    padding-left: 20px;
+}
+
+#h-time{
+    float: left;
+    width: 20%;
+}
+
+#h-temp{
+    float: left;
+    width: 20%;
+}
+
+#h-humi{
+    float: left;
+    width: 20%;
+}
+
+#h-light{
+    float: left;
+    width: 20%;
+}
+
+/* --------table body------- */
+#time-content{
+    width:20%;
+    float: left;
+    text-align: center;
+    
+}
+
+#id-content{
+    float: left;
+    width:12%;
+    padding-left: 20px;
+    text-align: center;
+}
+
+#temp-content {
+    width: 20%;
+    float: left;
+    text-align: center;
+}
+
+#humi-content{
+    width: 20%;
+    float: left;
+    text-align: center;
+}
+
+#light-content{
+    width: 20%;
+    float: left;
+    text-align: center;
+}
+/* -------------------------- */
+
+.h-para{
+    padding: 10px 20px;
+    border-bottom: 1px solid rgb(177, 140, 73);
+}

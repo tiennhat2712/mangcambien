@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="jquery.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="highcharts.js"></script>
+    <script src="export-data.js"></script>
+    <script src="accessibility.js"></script>
+
+    <script src="xuly.js"></script>
+
+    <link rel="stylesheet" href="home.css">
+    <title>Smart home</title>
+</head>
+
+<body>
+    <div class="title">
+        Điều khiển thiết bị
+        <!-- <div style="width: 66.5%;"></div> -->
+        <a href="/history" class="form">Lịch sử đo</a>
+    </div>
+    <div class="main-title">
+        BẢNG ĐIỀU KHIỂN 
+    </div>
+    <div class="main-content">
+        <div class="left-block">
+            <div class="current-state">
+                <div class="parameters-display">
+                    <div class="element-container">
+                        <div class="element-block" style="background-color: #13adc4;">
+                            <img class="element-icon" src="night-symbol-of-the-moon-with-a-cloud-and-stars.png" alt="">
+                            <div class="element-text">
+                                <p id="time"></p>
+                            </div>
+                        </div>
+                        <div class="element-block" style="background-color: #dd6f14;">
+                            <img class="element-icon" src="temprature.png" alt="">
+                            <div class="element-text">
+                                <p class="right5px">Nhiệt độ: </p>
+                                <p id="currentTemp"> </p>
+                                <p>&nbsp</p>
+                                <p> °C</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="element-container">
+                        <div class="element-block" style="background-color: #e7cc60">
+                            <img class="element-icon" src="sunny.png" alt="">
+                            <div class="element-text">
+                                <p class="right5px">Ánh sáng: </p>
+                                <p id="currentLight"> </p>
+                                <p>&nbsp</p>
+                                <p> Lux</p>
+                            </div>
+                        </div>
+                        <div class="element-block" style="background-color: #5c7ee3;">
+                            <img class="element-icon" src="drop.png" alt="">
+                            <div class="element-text">
+                                <p class="right5px">Độ ẩm: </p>
+                                <p id="currentHumi"> </p>
+                                <p>&nbsp</p>
+                                <p> % </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="warning" id="warningSection" style="background-color: #52125a;">
+                    <div style="
+                        display: flex;
+                        margin-top: 60px;">
+                        <img class="element-icon" src="bell.png" alt="">
+                        <p style="    
+                            margin-top: 47px;
+                            margin-left: 30px;
+                            color: #ecf0f5;">Tự động cảnh báo</p>
+                    </div>
+                </div>
+            </div>
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+            </figure>
+        </div>
+        <div class="right-block">
+            <div class="livingroom-control">
+                <div class="main-title">
+                    PHÒNG KHÁCH
+                </div>
+                <div class="element-container">
+                    <div id="livingrom-light" class="element-block appliances turn-off">
+                        <img class="element-icon" src="lightbulb.png" alt="">
+                        <input class="checkbox" type="checkbox" name="" onclick="livingroomLight()"
+                            id="livingroomLight">
+                        <div class="element-text">
+                            <p>Đèn</p>
+                        </div>
+                    </div>
+                    <div id="livingroom-air-conditioner" class="element-block appliances turn-off">
+                        <img class="element-icon" src="air-conditioner.png" alt="">
+                        <input class="checkbox" type="checkbox" name="" onclick="livingroomAirConditioner()"
+                            id="livingroomAirConditioner">
+                        <div class="element-text">
+                            <p>Điều hoà</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="element-container">
+                    <div id="television-container" class="element-block appliances width100 center turn-off">
+                        <img class="element-icon" src="television.png" alt="">
+                        <input class="checkbox" type="checkbox" name="" onclick = "television()" 
+                            id="television" >
+                        <div class="element-text">
+                            <p>Ti vi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bedroom-control">
+                <div class="main-title">
+                    PHÒNG NGỦ
+                </div>
+                <div class="element-container">
+                    <div id="bedroom-light" class="element-block appliances turn-off">
+                        <img class="element-icon" src="table-lamp.png" alt="">
+                        <input class="checkbox" type="checkbox" name="" onclick="bedroomLight()" id="bedroomLight">
+                        <div class="element-text">
+                            <p>Đèn ngủ</p>
+                        </div>
+                    </div>
+                    <div id="bedroom-air-conditioner" class="element-block appliances turn-off">
+                        <img class="element-icon" src="air-conditioner.png" alt="">
+                        <input class="checkbox" type="checkbox" name="" onclick="bedroomAirConditioner()" id="bedroomAirConditioner">
+                        <div class="element-text">
+                            <p>Điều hoà</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="element-container">
+                    <div id="bedroom-vent" class="element-block appliances width100 center turn-off">
+                        <img class="element-icon" src="air-vent.png" alt="">
+                        <input class="checkbox" type="checkbox" name="" onclick="airVent()" id="airVent">
+                        <div class="element-text">
+                            <p>Cửa thông gió</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Provided template, uncomment to compare -->
+    <!-- <div>
+        <img style="width: 1000px; height: 800px;" src="Ảnh chụp Màn hình 2021-07-30 lúc 20.17.59.png"
+            alt="">
+    </div> -->
+
+    <script type="text/javascript">
+
+        var chart = Highcharts.chart('container', {
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                text: 'Đồ thị nhiệt độ - độ ẩm'
+            },
+
+            xAxis: [{
+                categories: [],
+                tickWidth: 1,
+                tickLength: 20
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value}',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                title: {
+                    text: 'Nhiệt độ (°C)',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+            }, { // Secondary yAxis
+                title: {
+                    text: 'Độ ẩm(%)',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                labels: {
+                    format: '{value}',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                opposite: true
+            }],
+            tooltip: {
+                shared: true
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
+                verticalAlign: 'top',
+                y: 100,
+                floating: true,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || // theme
+                    'rgba(255,255,255,0.25)'
+            },
+            series: [{
+                name: 'Độ ẩm',
+                type: 'column',
+                color: '#5c7ee3',
+                yAxis: 1,
+                data: [],
+                tooltip: {
+                    valueSuffix: '%'
+                }
+
+            }, {
+                name: 'Nhiệt độ',
+                type: 'spline',
+                color: '#dd6f14',
+                data: [],
+                tooltip: {
+                    valueSuffix: '°C'
+                },
+                zones: [{
+                    value: 10,
+                    color: '#ff0015'
+                }, {
+                    value: 30,
+                    color: '#dd6f14'
+                }, {
+                    color: 'red'
+                }],
+            }],
+        });
+
+        socket.on("server-send-humi_graph", function (data) {
+            chart.series[0].setData(data);
+        });
+
+        socket.on("server-send-temp_graph", function (data) {
+            chart.series[1].setData(data);
+        });
+
+        socket.on("server-send-date_graph", function (data) {
+            chart.xAxis[0].setCategories(data);
+        });
+
+        // ------------- RTC ------------
+        var timeDisplay = document.getElementById("time");
+
+        function refreshTime() {
+            var dateString = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" });
+            var formattedString = dateString.replace(", ", " - ");
+            timeDisplay.innerHTML = formattedString;
+        }
+
+        setInterval(refreshTime, 1000);
+        // ------------------------------
+            
+
+    </script>
+
+</body>
+
+</html>
